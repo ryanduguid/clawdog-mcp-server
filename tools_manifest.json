@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "server_name": "clawdog-mcp-server",
+  "tools": [
+    {
+      "description": "Discover calculators matching a natural-language intent.\n\nPhase 3b: substring intent \u2192 routing entries (Fano semantic discovery\nis deferred to Phase 3d).\n\n:param intent: natural-language phrase (e.g. \"FBT car operating cost\").\n:returns: ``{\"matches\": [{\"calc\", \"version\", \"summary\"}...]}``",
+      "input_schema": {
+        "properties": {
+          "intent": {
+            "title": "Intent",
+            "type": "string"
+          }
+        },
+        "required": [
+          "intent"
+        ],
+        "title": "calculator_discoverArguments",
+        "type": "object"
+      },
+      "name": "calculator_discover"
+    },
+    {
+      "description": "Resolve an invocation_id to its cached trace + manifest + advisory.\n\nPhase 3b: in-memory LRU populated by calculator_invoke; cache misses\nreturn a structured pointer to the regression-suite root. Prolog-trace\nintegration is deferred to Phase 3d.\n\n:param invocation_id: the id returned by a prior calculator_invoke call.",
+      "input_schema": {
+        "properties": {
+          "invocation_id": {
+            "title": "Invocation Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "invocation_id"
+        ],
+        "title": "calculator_explainArguments",
+        "type": "object"
+      },
+      "name": "calculator_explain"
+    },
+    {
+      "description": "Invoke a calculator and return the byte-identical REST response.\n\nForwards to the Phase 3a calculator-api REST upstream; enforces\natom-vs-bridge (CLAWDOG/110 \u00a73.3), advisory-boundary (CLAWDOG/110\n\u00a73.2), and manifest passthrough (CLAWDOG/110 \u00a73.1).\n\n:param calc: calculator URI (e.g. \"urn:lodgeit:calculator:fbt\").\n:param version: dotted-decimal version (e.g. \"1.0\").\n:param params: calculator-specific input params (forwarded as-is).\n:param period: bare period scalar (\"FY26\") or period URI.\n:param jurisdiction: ISO 3166 alpha-2 (\"AU\").",
+      "input_schema": {
+        "properties": {
+          "calc": {
+            "title": "Calc",
+            "type": "string"
+          },
+          "jurisdiction": {
+            "title": "Jurisdiction",
+            "type": "string"
+          },
+          "params": {
+            "additionalProperties": true,
+            "title": "Params",
+            "type": "object"
+          },
+          "period": {
+            "title": "Period",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "calc",
+          "version",
+          "params",
+          "period",
+          "jurisdiction"
+        ],
+        "title": "calculator_invokeArguments",
+        "type": "object"
+      },
+      "name": "calculator_invoke"
+    }
+  ]
+}

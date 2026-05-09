@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clawdog-mcp-server"
+version = "0.1.0a0"
+description = "Calculator-Constellation MCP Server — stdio transport adapter for the LodgeiT calculator pool (Phase 3b)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [
+    { name = "LodgeiT Labs" },
+]
+keywords = [
+    "lodgeit",
+    "clawdog",
+    "mcp",
+    "model-context-protocol",
+    "fbt",
+    "calculator",
+    "tax",
+    "egress-interface",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: Office/Business :: Financial :: Accounting",
+]
+dependencies = [
+    "mcp>=1.0",
+    "httpx>=0.27",
+    "pydantic>=2.6",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.5",
+    "anyio>=4.2",
+]
+
+[project.scripts]
+clawdog-mcp = "clawdog_mcp.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/lodgeit-labs/clawdog-mcp-server"
+"Architecture canon (CLAWDOG/109)" = "https://github.com/futureWA/clawdog-brain/blob/master/GLOBAL_NOTES/CLAWDOG/109_CALCULATOR_CONSTELLATION.md"
+"Outsource boundary canon (CLAWDOG/110)" = "https://github.com/futureWA/clawdog-brain/blob/master/GLOBAL_NOTES/CLAWDOG/110_OUTSOURCE_BOUNDARY_DISCIPLINE.md"
+"MCP design canon (META/005)" = "https://github.com/futureWA/clawdog-brain/blob/master/GLOBAL_NOTES/META/005_MCP_SERVER_DESIGN.md"
+"Phase 3a REST upstream" = "https://github.com/lodgeit-labs/clawdog-calculator-api"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["clawdog_mcp*"]
+
+[tool.setuptools.package-data]
+clawdog_mcp = ["config/*.yaml"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B", "UP"]
+ignore = [
+    "E501",  # line length handled by formatter
+    "B008",  # FastAPI/Depends idiom (parity with calc-api)
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests deliberately use pytest.raises(Exception) for catch-all atom-boundary
+# negative cases (pydantic raises ValidationError under the Exception umbrella;
+# the catch-all keeps the parametrised case-table compact).
+"tests/*" = ["B017"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-ra -q"
