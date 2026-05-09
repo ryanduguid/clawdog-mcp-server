@@ -1,0 +1,54 @@
+{
+  "taxable_value": 5547.75,
+  "trace": {
+    "applied_rate_table_uris": [
+      "urn:sbrm:rate:fbt:fy2026:deemed-depreciation-rates",
+      "urn:sbrm:rate:fbt:fy2026:benchmark-interest",
+      "urn:sbrm:rate:fbt:fy2026:days-in-year"
+    ],
+    "deemed_dispatch": "computed",
+    "form_of_finance": "owned",
+    "deemed_depreciation": 13750.0,
+    "deemed_interest": 4741.0,
+    "deemed_total": 18491.0,
+    "business_use_pct": 75,
+    "business_use_reduction": 13868.25,
+    "employee_contribution": 200.0,
+    "fuel_repairs_servicing": 3000.0,
+    "lease_payments": 0.0,
+    "no_private_use_reduction": 0.0,
+    "registration_insurance": 1500.0,
+    "total_after_npur": 24991.0,
+    "tv_before_operating": 5547.75,
+    "tv_final": 5547.75,
+    "tv_net_pre_clamp": 5547.75
+  },
+  "manifest": {
+    "rate_table_uris": [
+      {
+        "uri": "urn:sbrm:rate:fbt:fy2026:deemed-depreciation-rates",
+        "content_hash": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+        "hash_algorithm": "sha256"
+      },
+      {
+        "uri": "urn:sbrm:rate:fbt:fy2026:benchmark-interest",
+        "content_hash": "fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+        "hash_algorithm": "sha256"
+      },
+      {
+        "uri": "urn:sbrm:rate:fbt:fy2026:days-in-year",
+        "content_hash": "1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff",
+        "hash_algorithm": "sha256"
+      }
+    ]
+  },
+  "advisory": {
+    "disclaimer": "This calculator implements a deterministic projection of statutory law as enacted; outputs are NOT advice. Engagement with a registered tax agent is required for filings and rulings.",
+    "registered_agent_required": true,
+    "statutory_basis": [
+      {"act": "Fringe Benefits Tax Assessment Act 1986", "jurisdiction": "AU"},
+      {"act": "Tax Agent Services Act 2009", "jurisdiction": "AU"}
+    ],
+    "jurisdiction": "AU"
+  }
+}

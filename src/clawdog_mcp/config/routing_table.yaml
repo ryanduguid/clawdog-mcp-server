@@ -1,0 +1,32 @@
+# clawdog-mcp-server routing table — Phase 3b
+#
+# Hardcoded routing per CLAWDOG/109 §8.2: one entry per onboarded calculator.
+# Phase 3b ships with exactly one entry (FBT). Phase 3c onboards a second
+# calculator to validate that this abstraction holds without modifying the
+# MCP server itself.
+#
+# Discovery (calculator.discover) substring-matches `intent` against `summary`.
+# Fano-backed semantic discovery is deferred to Phase 3d.
+#
+# Structural-marker requirements (production-bundle gate, Standing Rule #12):
+#   - top-level key `routing_table:` (a list)
+#   - each entry MUST carry: calc, version, summary, rest_base,
+#                            regression_suite_root, advisory_jurisdiction
+#   - rest_base MUST be an https URL
+#
+# Atom-vs-bridge boundary (CLAWDOG/110 §3.3): `calc`/`version` are atoms;
+# their interpretation lives in MCP→REST routing (i.e. the rest_base + the
+# REST URL template), not in the atom values themselves.
+
+schema_version: 1
+routing_table:
+  - calc: "urn:lodgeit:calculator:fbt"
+    version: "1.0"
+    summary: >-
+      Fringe Benefits Tax (FBT) — AU. Statutory Formula and Operating Cost
+      methods for cars. Phase 2l (5 SF + 4 OC sheet cases + deemed-amounts
+      predicate).
+    rest_base: "https://clawdog-calculator-api-8340695160.australia-southeast1.run.app"
+    rest_invoke_path_template: "/v1/calculators/{calc_uri}/{period_uri}"
+    regression_suite_root: "lodgeit-labs/LodgeiT_FBT/regression_suite/"
+    advisory_jurisdiction: "AU"
