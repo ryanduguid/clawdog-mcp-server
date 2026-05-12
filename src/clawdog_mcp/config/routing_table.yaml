@@ -30,3 +30,23 @@ routing_table:
     rest_invoke_path_template: "/v1/calculators/{calc_uri}/{period_uri}"
     regression_suite_root: "lodgeit-labs/LodgeiT_FBT/regression_suite/"
     advisory_jurisdiction: "AU"
+  - calc: "urn:lodgeit:calculator:depreciation"
+    version: "1.0"
+    summary: >-
+      Depreciation — AU accounting-side audit endpoint. Cross-checks ledger
+      `current_book_accum_dep` against the accounting-method ideal (prime
+      cost or diminishing value) at a transition_date. Scope is
+      accounting-side only (prime cost + diminishing value); IAWO/pool
+      methods are tax-side concerns not modelled here. Onboarded Phase
+      3c.3.B (2026-05-12) per clawdog-brain CLAWDOG/112 cycle.
+    rest_base: "https://clawdog-calculator-api-8340695160.australia-southeast1.run.app"
+    # NOTE: β.2.B (clawdog-calculator-api PR #4) ships depreciation under a
+    # SEPARATE route shape (`/v1/calculators/depreciation/audit/{period_uri}`)
+    # rather than the FBT-shaped `/v1/calculators/{calc_uri}/{period_uri}`,
+    # because the response shape (`audited_standard_assets` list vs FBT's
+    # `taxable_value` scalar) differs structurally. Phase 3c.4 collapses
+    # both into the unified `(calc_uri, method)` dispatcher; until then this
+    # routing entry's `rest_invoke_path_template` is bespoke.
+    rest_invoke_path_template: "/v1/calculators/depreciation/audit/{period_uri}"
+    regression_suite_root: "lodgeit-labs/Depreciation_Transforms/app/server/tests/"
+    advisory_jurisdiction: "AU"
