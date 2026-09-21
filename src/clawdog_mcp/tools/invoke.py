@@ -91,6 +91,18 @@ async def invoke(
             }
         }
 
+    if validated.jurisdiction != entry["advisory_jurisdiction"]:
+        return {
+            "error": {
+                "code": "jurisdiction_mismatch",
+                "detail": (
+                    f"jurisdiction={validated.jurisdiction!r} does not match routed "
+                    f"jurisdiction={entry['advisory_jurisdiction']!r} for "
+                    f"calc={validated.calc!r} version={validated.version!r}"
+                ),
+            }
+        }
+
     # 3. Translate atoms to the URI shape the REST surface expects.
     #    Phase 3b only routes FBT car operating cost; the period URI is
     #    constructed bridge-side from the bare period scalar (or accepted

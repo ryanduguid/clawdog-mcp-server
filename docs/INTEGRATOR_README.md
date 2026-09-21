@@ -102,6 +102,7 @@ Every `calculator_invoke` response is checked at the MCP egress for:
 Every `calculator_invoke` input is checked for:
 
 - **Atom-vs-bridge** (CLAWDOG/110 §3.3): no jurisdiction/currency smuggling into `calc`, `version`, or `period` atoms.
+- **Jurisdiction match**: `jurisdiction` must match the selected route's `advisory_jurisdiction`. A mismatch returns `jurisdiction_mismatch` before any upstream request or invocation-cache entry is created.
 
 ## §5 Configuration
 
