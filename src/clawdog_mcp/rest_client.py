@@ -101,7 +101,7 @@ class CalculatorRestClient:
             resp = await self._client.post(url, json=params, headers=self._headers())
         except httpx.HTTPError as e:
             raise RestUpstreamError(f"transport error contacting {url}: {e}") from e
-        if resp.status_code >= 400:
+        if not resp.is_success:
             raise RestUpstreamError(
                 f"upstream REST returned {resp.status_code}",
                 status_code=resp.status_code,

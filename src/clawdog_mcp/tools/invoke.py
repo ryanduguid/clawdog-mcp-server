@@ -91,6 +91,17 @@ async def invoke(
             }
         }
 
+    if validated.jurisdiction != entry["advisory_jurisdiction"]:
+        return {
+            "error": {
+                "code": "jurisdiction_mismatch",
+                "boundary": "route",
+                "detail": "Requested jurisdiction does not match the calculator route.",
+                "requested_jurisdiction": validated.jurisdiction,
+                "routed_jurisdiction": entry["advisory_jurisdiction"],
+            }
+        }
+
     # 3. Translate atoms to the URI shape the REST surface expects.
     #    Phase 3b only routes FBT car operating cost; the period URI is
     #    constructed bridge-side from the bare period scalar (or accepted
@@ -135,6 +146,19 @@ async def invoke(
             "error": {
                 "code": "advisory_boundary_violation",
                 "detail": str(e),
+                "upstream_endpoint": full_url,
+            }
+        }
+
+    advisory = body["advisory"]
+    if "jurisdiction" in advisory and advisory["jurisdiction"] != validated.jurisdiction:
+        return {
+            "error": {
+                "code": "jurisdiction_mismatch",
+                "boundary": "advisory",
+                "detail": "Upstream advisory jurisdiction does not match the accepted request.",
+                "requested_jurisdiction": validated.jurisdiction,
+                "advisory_jurisdiction": advisory["jurisdiction"],
                 "upstream_endpoint": full_url,
             }
         }
