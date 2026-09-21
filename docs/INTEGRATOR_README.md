@@ -98,6 +98,7 @@ Every `calculator_invoke` response is checked at the MCP egress for:
 
 - **Manifest-fidelity** (CLAWDOG/110 §3.1): `manifest` block byte-identical to REST.
 - **Advisory-boundary** (CLAWDOG/110 §3.2): `advisory.disclaimer` is non-empty. An upstream that omits it triggers a structured `advisory_boundary_violation` error with the upstream endpoint URL named in `error.detail`.
+- **Response consistency:** when the advisory declares a jurisdiction, it must match the accepted request and route. A conflict returns `jurisdiction_mismatch` before caching. HTTP responses outside 200–299 return `rest_upstream_error`, even if they contain an otherwise valid advisory; redirects are not followed by the default client.
 
 Every `calculator_invoke` input is checked for:
 

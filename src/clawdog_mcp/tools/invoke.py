@@ -151,6 +151,16 @@ async def invoke(
             }
         }
 
+    advisory = body["advisory"]
+    if "jurisdiction" in advisory and advisory["jurisdiction"] != validated.jurisdiction:
+        return {
+            "error": {
+                "code": "jurisdiction_mismatch",
+                "detail": "upstream advisory jurisdiction does not match the requested jurisdiction",
+                "upstream_endpoint": full_url,
+            }
+        }
+
     # 6. Cache + assign invocation_id (for calculator.explain).
     invocation_id = f"inv_{uuid.uuid4().hex}"
     cached_payload = {
