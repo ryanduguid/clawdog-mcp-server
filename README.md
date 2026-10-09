@@ -1,5 +1,9 @@
 # clawdog-mcp-server
 
+**Fork status**
+
+[![Fork code quality](https://app.codacy.com/project/badge/Grade/6f68ee0e138d4d7097ef854679f1f95b?branch=main)](https://app.codacy.com/gh/ryanduguid/clawdog-mcp-server/dashboard)
+
 **Calculator-Constellation MCP Server — stdio transport adapter for the LodgeiT calculator pool (Phase 3b).**
 
 This repository implements the **MCP surface** of the calculator constellation defined in [CLAWDOG/109 — Calculator Constellation](https://github.com/futureWA/clawdog-brain/blob/master/GLOBAL_NOTES/CLAWDOG/109_CALCULATOR_CONSTELLATION.md). The server exposes three meta-tools (`calculator_discover`, `calculator_invoke`, `calculator_explain`) over stdio, shelling every invocation to the Phase 3a [`clawdog-calculator-api`](https://github.com/lodgeit-labs/clawdog-calculator-api) REST surface — which in turn shells to the Phase 2l Prolog substrate (`lodgeit-labs/LodgeiT_FBT`).
