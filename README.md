@@ -2,7 +2,7 @@
 
 **Fork status**
 
-[![Fork code quality](https://app.codacy.com/project/badge/Grade/6f68ee0e138d4d7097ef854679f1f95b?branch=main)](https://app.codacy.com/gh/ryanduguid/clawdog-mcp-server/dashboard)
+[![Fork code quality](https://img.shields.io/codacy/grade/6f68ee0e138d4d7097ef854679f1f95b/main?style=flat&labelColor=000000)](https://app.codacy.com/gh/ryanduguid/clawdog-mcp-server/dashboard)
 
 **Calculator-Constellation MCP Server — stdio transport adapter for the LodgeiT calculator pool (Phase 3b).**
 
